@@ -4,13 +4,14 @@ provider "statuscake" {
 }
 
 locals {
-  website_name = "internal-dev-helloworld"
+  service_name = "internal-dev_helloworld"
+  website_name = "internal-dev.api.service.nhs.uk"
   ping_url = "https://${local.website_name}/hello-world/_ping"
   status_url = "https://${local.website_name}/hello-world/_status"
 }
 
 resource "statuscake_test" "ping" {
-  website_name = "${local.website_name}-ping"
+  website_name = "${local.service_name}-ping"
   website_url  = local.ping_url
   test_type    = "HTTP"
   check_rate   = 300
@@ -18,7 +19,7 @@ resource "statuscake_test" "ping" {
 }
 
 resource "statuscake_test" "status" {
-  website_name = "${local.website_name}-status"
+  website_name = "${local.service_name}-status"
   website_url  = local.status_url
   test_type    = "HTTP"
   check_rate   = 300
